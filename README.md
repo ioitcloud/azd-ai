@@ -1,4 +1,4 @@
-# azd-litellm ![Awesome Badge](https://awesome.re/badge-flat2.svg)
+# azd-ai ![Awesome Badge](https://awesome.re/badge-flat2.svg)
 
 An `azd` template to deploy Tika and Litellm postgreSQL database.
 
