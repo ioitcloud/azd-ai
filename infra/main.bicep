@@ -33,13 +33,6 @@ param databaseAdminPassword string
 
 param tikaContainerAppExists bool
 
-/* @description('Master key for LiteLLM. Your master key for the proxy server.')
-@secure()
-param litellm_master_key string
-
-@description('Salt key for LiteLLM. (CAN NOT CHANGE ONCE SET)')
-@secure()
-param litellm_salt_key string */
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, resourceGroupName, environmentName, location))
@@ -68,15 +61,6 @@ module monitoring './shared/monitoring.bicep' = {
   scope: rg
 }  
 
-/* module containerRegistry './shared/container-registry.bicep' = {
-  name: 'cotainer-registry'
-  params: {
-    location: location
-    tags: tags
-    name: '${abbrs.containerRegistryRegistries}${resourceToken}'
-  }
-  scope: rg
-}  */
 
 module appsEnv './shared/apps-env.bicep' = {
   name: 'apps-env'
@@ -112,16 +96,6 @@ module postgresqlDatabase './shared/postgresql_database.bicep' = {
   }
   scope: rg
 }
-
-// module keyvault './shared/keyvault.bicep' = {
-//   name: 'keyvault'
-//   params: {
-//     name: '${abbrs.keyVaultVaults}litellm-${resourceToken}'
-//     location: location
-//     tags: tags
-//   }
-//   scope: rg
-// }
 
 // Deploy Tika Container App via module call.
 module tika './app/tika.bicep' = {
