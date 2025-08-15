@@ -107,7 +107,7 @@ resource postgresqlServer 'Microsoft.DBforPostgreSQL/flexibleServers@2024-11-01-
 
 resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2024-11-01-preview' = {
   parent: postgresqlServer
-  name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
+  name: 'AllowAiv2'
   properties: {
     startIpAddress: postgresqlIPRestrict
     endIpAddress: postgresqlIPRestrict
