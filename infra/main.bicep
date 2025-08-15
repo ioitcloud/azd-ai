@@ -10,7 +10,10 @@ param environmentName string
 param location string
 
 @description('Name of the resource group to create or use')
-param resourceGroupName string 
+param resourceGroupName string = 'azd-aiv2'
+
+@description('Name of the client. To be used on storage account name. Ie. "ioit"aiv2')
+param clientName string 
 
 @description('Port exposed by the Tika container.')
 param containerPort int = 9998
@@ -113,13 +116,17 @@ module tika './app/tika.bicep' = {
   scope: rg
 } 
 
+// Create Storage Account
+module storage './shared/storage.bicep' = {
+  name: 'createStorage'
+  scope: rg
+  params: {
+    storageAccountName: 'aiv2${clientName}'
+    location: location
+  }
+}
 
-/* output AZURE_CONTAINER_REGISTRY_ENDPOINT string = containerRegistry.outputs.loginServer
-output LITELLM_MASTER_KEY string = litellm_master_key
-output LITELLM_SALT_KEY string = litellm_salt_key */
 
-//output LITELLM_CONTAINER_APP_EXISTS bool = true
-// output LITELLM_CONTAINERAPP_FQDN string = litellm.outputs.containerAppFQDN
-// output POSTGRESQL_FQDN string = postgresql.outputs.fqdn
+output POSTGRESQL_FQDN string = postgresql.outputs.fqdn
 
 
