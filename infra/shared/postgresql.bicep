@@ -8,7 +8,7 @@ param name string
 param postgresqlIPRestrict string
 
 @description('The SKU name for the PostgreSQL server.')
-param skuName string = 'Standard_D2ds_v4'
+param skuName string = 'Standard_B1ms'
 
 @description('The tier for the PostgreSQL server.')
 @allowed([
@@ -16,7 +16,7 @@ param skuName string = 'Standard_D2ds_v4'
   'MemoryOptimized'
   'Burstable'
 ])
-param skuTier string = 'GeneralPurpose'
+param skuTier string = 'Burstable'
 
 @description('The version of the PostgreSQL server.')
 param version string = '16'
