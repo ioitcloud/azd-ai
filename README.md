@@ -29,3 +29,7 @@ To use this template, follow these steps using the [Azure Developer CLI](https:/
     Be sure to save these secrets and passwords to keep them safe.
 
 5. Once the template has finished provisioning all resources, and Azure Container Apps has completed deploying the tika container _(this can take a minute or so after `azd up` completes to finish)_, you can access both the Swagger UI and UI for tika
+
+## Architecture Diagram
+
+![Diagram of Azure Resources provisioned with this template](assets/azd_ai_diagram.png)
