@@ -116,7 +116,7 @@ module tika './app/tika.bicep' = {
     containerPort: containerPort
     containerMinReplicaCount: containerMinReplicaCount
     containerMaxReplicaCount: containerMaxReplicaCount
-    iprestrict: ipRestrict
+    tikaIPrestrict: ipRestrict
   }
   scope: rg
 } 

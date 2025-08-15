@@ -10,6 +10,9 @@ param containerAppsEnvironmentName string
 @description('Name for the App.')
 param name string
 
+@description('Restrict network access to this IP address.')
+param tikaIPrestrict string
+
 @description('Port exposed by the Tika container.')
 param containerPort int
 
@@ -33,7 +36,9 @@ module fetchLatestContainerImage '../shared/fetch-container-image.bicep' = {
   }
 }
 
-resource tikaContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
+
+
+resource tikaContainerApp 'Microsoft.App/containerApps@2025-01-01' = {
   name: name
   location: location
   tags: union(tags, { 'azd-service-name': 'tika' })
@@ -44,6 +49,14 @@ resource tikaContainerApp 'Microsoft.App/containerApps@2024-03-01' = {
         external: true
         targetPort: containerPort
         transport: 'auto'
+        ipSecurityRestrictions: [
+          {
+            action: 'Allow'
+            description: 'Allows traffic from aiv2 VM'
+            ipAddressRange: tikaIPrestrict
+            name: 'AllowAIv2'
+          }
+        ]
       }
     }
     template: {
