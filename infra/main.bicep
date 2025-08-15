@@ -22,10 +22,10 @@ param ipRestrict string
 param containerPort int = 9998
 
 @description('Minimum replica count for Tika containers.')
-param containerMinReplicaCount int = 2
+param containerMinReplicaCount int = 1
 
 @description('Maximum replica count for Tika containers.')
-param containerMaxReplicaCount int = 3 
+param containerMaxReplicaCount int = 1 
 
 @description('Name of the PostgreSQL database.')
 param databaseName string = 'litellmdb'
