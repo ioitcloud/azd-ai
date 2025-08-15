@@ -4,6 +4,9 @@ param location string
 @description('The name of the PostgreSQL server.')
 param name string
 
+@description('The name of the PostgreSQL server.')
+param postgresqlIPRestrict string
+
 @description('The SKU name for the PostgreSQL server.')
 param skuName string = 'Standard_D2ds_v4'
 
@@ -106,8 +109,8 @@ resource firewallRuleAllowAzureIPs 'Microsoft.DBforPostgreSQL/flexibleServers/fi
   parent: postgresqlServer
   name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
   properties: {
-    startIpAddress: '0.0.0.0'
-    endIpAddress: '0.0.0.0'
+    startIpAddress: postgresqlIPRestrict
+    endIpAddress: postgresqlIPRestrict
   }
 }
 

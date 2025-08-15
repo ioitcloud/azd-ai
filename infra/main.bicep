@@ -15,6 +15,9 @@ param resourceGroupName string = 'azd-aiv2'
 @description('Name of the client. To be used on storage account name. Ie. "ioit"aiv2')
 param clientName string 
 
+@description('Public IP of the AI-v2 VM, to allow access to tika container and PostgreSQL db.')
+param ipRestrict string
+
 @description('Port exposed by the Tika container.')
 param containerPort int = 9998
 
@@ -86,6 +89,7 @@ module postgresql './shared/postgresql.bicep' = {
     tags: tags
     databaseAdminUser: databaseAdminUser
     databaseAdminPassword: databaseAdminPassword
+    postgresqlIPRestrict: ipRestrict
   }
   scope: rg
 }
@@ -112,6 +116,7 @@ module tika './app/tika.bicep' = {
     containerPort: containerPort
     containerMinReplicaCount: containerMinReplicaCount
     containerMaxReplicaCount: containerMaxReplicaCount
+    iprestrict: ipRestrict
   }
   scope: rg
 } 
