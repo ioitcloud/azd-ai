@@ -27,8 +27,11 @@ param containerMinReplicaCount int = 1
 @description('Maximum replica count for Tika containers.')
 param containerMaxReplicaCount int = 1 
 
-@description('Name of the PostgreSQL database.')
-param databaseName string = 'litellmdb'
+@description('Name of the Open Web UI database.')
+param openWebUiDbName string = 'openwebuidb'
+
+@description('Name of the LiteLLM database.')
+param liteLlmDbName string = 'litellmdb'
 
 @description('Name of the PostgreSQL database admin user.')
 param databaseAdminUser string = 'litellmuser'
@@ -84,7 +87,7 @@ module appsEnv './shared/apps-env.bicep' = {
 module postgresql './shared/postgresql.bicep' = {
   name: 'postgresql'
   params: {
-    name: '${abbrs.dBforPostgreSQLServers}litellm-${resourceToken}'
+    name: '${abbrs.dBforPostgreSQLServers}aiv2-${resourceToken}'
     location: location
     tags: tags
     databaseAdminUser: databaseAdminUser
@@ -99,7 +102,8 @@ module postgresqlDatabase './shared/postgresql_database.bicep' = {
   name: 'postgresqlDatabase'
   params: {
     serverName: postgresql.outputs.name
-    databaseName: databaseName
+    openWebUIName: openWebUiDbName
+    liteLLMName: liteLlmDbName
   }
   scope: rg
 }
