@@ -34,7 +34,7 @@ param openWebUiDbName string = 'openwebuidb'
 param liteLlmDbName string = 'litellmdb'
 
 @description('Name of the PostgreSQL database admin user.')
-param databaseAdminUser string = 'litellmuser'
+param databaseAdminUser string = 'dbadmin'
 
 @description('Password for the PostgreSQL database admin user.')
 @secure()
