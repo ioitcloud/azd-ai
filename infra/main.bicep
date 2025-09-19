@@ -10,7 +10,7 @@ param environmentName string
 param location string
 
 @description('Name of the resource group to create or use')
-param resourceGroupName string = 'azd-aiv2'
+param resourceGroupName string = 'Ai-V2-ACS'
 
 @description('Name of the client. To be used on storage account name. Ie. "ioit"aiv2')
 param clientName string 
